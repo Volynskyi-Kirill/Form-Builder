@@ -12,22 +12,22 @@ export class QuestionService {
   ) {}
 
   create(createQuestionDto: CreateQuestionDto) {
-    return 'This action adds a new question';
+    return this.questionModel.create(createQuestionDto);
   }
 
   findAll() {
-    return `This action returns all question`;
+    return this.questionModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} question`;
+  findOne(id: string) {
+    return this.questionModel.findById(id);
   }
 
-  update(id: number, updateQuestionDto: UpdateQuestionDto) {
-    return `This action updates a #${id} question`;
+  update(id: string, updateQuestionDto: UpdateQuestionDto) {
+    return this.questionModel.findByIdAndDelete(id, updateQuestionDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} question`;
+  remove(id: string) {
+    return this.questionModel.findByIdAndDelete(id);
   }
 }
