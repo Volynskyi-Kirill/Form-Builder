@@ -1,4 +1,4 @@
 export enum QUESTION_TYPE {
-  SHORT = 'SHORT',
-  LONG = 'LONG',
+  SHORT = 'short',
+  LONG = 'long',
 }
