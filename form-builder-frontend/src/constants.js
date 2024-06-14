@@ -8,10 +8,9 @@ export const QUESTION = {
   DEFAULT_SIZE: 1
 }
 
-const baseUrl = 'http://localhost:3000'
-
+const BASE_URL = import.meta.env.VITE_BASE_URL_API
 export const API = {
-  QUESTION: `${baseUrl}/question`
+  QUESTION: `${BASE_URL}/question`
 }
 
 export const EVENT = {
