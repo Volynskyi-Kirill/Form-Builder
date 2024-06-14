@@ -35,6 +35,7 @@ export class QuestionController {
     @Param('id') id: string,
     @Body() updateQuestionDto: UpdateQuestionDto,
   ) {
+
     return this.questionService.update(id, updateQuestionDto);
   }
 

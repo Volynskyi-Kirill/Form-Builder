@@ -12,11 +12,11 @@ export class Question {
   @Prop({ required: true })
   title: string;
 
-  @Prop({ required: true })
+  @Prop()
   text: string;
 
   @Prop()
-  size: string;
+  size: number;
 }
 
 export const QuestionSchema = SchemaFactory.createForClass(Question);

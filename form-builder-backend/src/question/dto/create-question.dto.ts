@@ -1,4 +1,10 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { QUESTION_TYPE } from 'src/shared/enums';
 
 export class CreateQuestionDto {
@@ -11,10 +17,10 @@ export class CreateQuestionDto {
   title: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   text: string;
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  size: string;
+  size: number;
 }

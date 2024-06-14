@@ -24,7 +24,7 @@ export class QuestionService {
   }
 
   update(id: string, updateQuestionDto: UpdateQuestionDto) {
-    return this.questionModel.findByIdAndDelete(id, updateQuestionDto);
+    return this.questionModel.findByIdAndUpdate(id, updateQuestionDto);
   }
 
   remove(id: string) {
