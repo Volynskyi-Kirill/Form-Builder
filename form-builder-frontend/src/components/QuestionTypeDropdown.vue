@@ -1,15 +1,11 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
-import Dropdown from 'primevue/dropdown'
+import { EVENT, QUESTION_TYPE } from '../constants'
 
-const props = defineProps({
-  items: Array
-})
-
-const emits = defineEmits(['add-question'])
+const items = Object.values(QUESTION_TYPE).map((type) => ({ label: type }))
+const emits = defineEmits([EVENT.ADD_QUESTION])
 
 const addQuestion = (event) => {
-  emits('add-question', event.value)
+  emits(EVENT.ADD_QUESTION, event.value)
 }
 </script>
 
