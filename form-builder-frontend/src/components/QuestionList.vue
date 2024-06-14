@@ -1,30 +1,31 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
-import Card from 'primevue/card'
-import Button from 'primevue/button'
+import { EVENT } from '../constants'
 
-const props = defineProps({
+defineProps({
   questions: Array,
   selectedQuestion: Object
 })
 
-const emits = defineEmits(['select-question', 'delete-question'])
+defineEmits([EVENT.SELECT_QUESTION, EVENT.DELETE_QUESTION])
 </script>
 
 <template>
   <div>
     <div
-      v-for="(question, index) in questions"
-      :key="index"
-      :class="['question-item', { 'question-item-selected': selectedQuestion?.id === question.id }]"
+      v-for="question in questions"
+      :key="question._id"
+      :class="[
+        'question-item',
+        { 'question-item-selected': selectedQuestion?._id === question._id }
+      ]"
     >
-      <Card class="card" @click="() => $emit('select-question', question)">
+      <Card class="card" @click="() => $emit(EVENT.SELECT_QUESTION, question)">
         <template #title>
-          <span>{{ question.label }}</span>
+          <span>{{ question.title }}</span>
           <Button
             icon="pi pi-times"
             class="p-button-danger p-button-text delete-button"
-            @click.stop="() => $emit('delete-question', question.id)"
+            @click.stop="() => $emit(EVENT.DELETE_QUESTION, question._id)"
           />
           <p class="question-type">{{ question.type }}</p>
         </template>
@@ -39,12 +40,16 @@ const emits = defineEmits(['select-question', 'delete-question'])
 }
 .card {
   position: relative;
-  padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
+
+:deep().p-card-body {
+  padding: 1rem;
+}
+
 .delete-button {
   position: absolute;
   top: 10px;

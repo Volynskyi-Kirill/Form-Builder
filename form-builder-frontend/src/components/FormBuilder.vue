@@ -1,19 +1,28 @@
 <script setup>
+import { onMounted } from 'vue'
 import {
   questions,
   selectedQuestion,
   textAreaSize,
-  items,
+  fetchQuestions,
   addQuestion,
   deleteQuestion,
   selectQuestion,
   updateQuestionLabel,
   updateQuestionText,
   updateTextAreaSize
-} from './formBuilderSetup'
+} from '../formBuilderSetup'
 import QuestionList from './QuestionList.vue'
 import QuestionTypeDropdown from './QuestionTypeDropdown.vue'
 import QuestionPreview from './QuestionPreview.vue'
+import { STORAGE } from '../constants'
+
+onMounted(async () => {
+  await fetchQuestions()
+  const lastSelectedQuestionId = localStorage.getItem(STORAGE.SELECTED_QUESTION_ID)
+  const questionToSelect = questions.value.find((q) => q._id === lastSelectedQuestionId)
+  selectQuestion(questionToSelect)
+})
 </script>
 
 <template>
@@ -25,7 +34,7 @@ import QuestionPreview from './QuestionPreview.vue'
         @select-question="selectQuestion"
         @delete-question="deleteQuestion"
       />
-      <QuestionTypeDropdown :items="items" @add-question="addQuestion" />
+      <QuestionTypeDropdown @add-question="addQuestion" />
     </div>
     <QuestionPreview
       v-if="selectedQuestion"
@@ -45,12 +54,19 @@ import QuestionPreview from './QuestionPreview.vue'
 .form-builder-container {
   width: 550px;
   height: 100vh;
-  border: solid 1px;
+  border-right: solid 1px;
   padding: 20px 20px;
 }
 
-::v-deep .p-slider.p-slider-horizontal .p-slider-handle {
-  margin-top: -0.5715rem;
-  margin-left: -0.5715rem;
+@media (max-width: 1200px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .form-builder-container {
+    width: 100%;
+    height: auto;
+    border-right: none;
+  }
 }
 </style>

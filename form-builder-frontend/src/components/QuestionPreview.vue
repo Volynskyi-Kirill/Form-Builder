@@ -1,7 +1,6 @@
 <script setup>
-import { defineProps, ref, watch } from 'vue'
-import Slider from 'primevue/slider'
-import { QUESTION_TYPE } from './constants'
+import { ref, watch } from 'vue'
+import { QUESTION_TYPE, EVENT } from '../constants'
 
 const props = defineProps({
   selectedQuestion: Object,
@@ -24,23 +23,23 @@ watch(
     <div>
       <label for="questionLabel">Question</label>
       <input
-        id="questionLabel"
-        v-model="selectedQuestion.label"
-        @input="$emit('update-question-label', $event)"
+        _id="questionLabel"
+        v-model="selectedQuestion.title"
+        @input="$emit(EVENT.UPDATE_QUESTION_LABEL, $event)"
       />
     </div>
     <div v-if="selectedQuestion.type === QUESTION_TYPE.LONG">
       <label for="textAreaSize">Text field size</label>
       <Slider
-        id="textAreaSize"
+        _id="textAreaSize"
         v-model="localTextAreaSize"
         style="max-width: 400px"
-        @change="$emit('update-text-area-size', localTextAreaSize)"
+        @change="$emit(EVENT.UPDATE_TEXT_AREA_SIZE, localTextAreaSize)"
       />
     </div>
     <h4>PREVIEW</h4>
     <div>
-      <p>{{ selectedQuestion.label }}</p>
+      <p>{{ selectedQuestion.title }}</p>
       <textarea
         :rows="selectedQuestion.size"
         v-model="selectedQuestion.text"
@@ -53,7 +52,7 @@ watch(
 <style scoped>
 .preview-question {
   flex-grow: 1;
-  border: solid 1px #ccc;
+
   padding: 20px;
   margin-left: 20px;
 }

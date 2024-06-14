@@ -10,9 +10,6 @@ import FormBuilder from './components/FormBuilder.vue'
 
 <style>
 * {
-  padding: 0px;
-  margin: 0px;
-  border: 0px;
   box-sizing: border-box;
 }
 body,
