@@ -17,7 +17,6 @@ export const EVENT = {
   ADD_QUESTION: 'add-question',
   SELECT_QUESTION: 'select-question',
   DELETE_QUESTION: 'delete-question',
-  UPDATE_QUESTION_LABEL: 'update-question-label',
   UPDATE_TEXT_AREA_SIZE: 'update-text-area-size'
 }
 

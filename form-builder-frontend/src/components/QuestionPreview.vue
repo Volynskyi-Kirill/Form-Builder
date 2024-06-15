@@ -22,11 +22,7 @@ watch(
     <h3>Settings</h3>
     <div>
       <label for="questionLabel">Question</label>
-      <input
-        _id="questionLabel"
-        v-model="selectedQuestion.title"
-        @input="$emit(EVENT.UPDATE_QUESTION_LABEL, $event)"
-      />
+      <input _id="questionLabel" v-model="selectedQuestion.title" />
     </div>
     <div v-if="selectedQuestion.type === QUESTION_TYPE.LONG">
       <label for="textAreaSize">Text field size</label>

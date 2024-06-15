@@ -18,4 +18,11 @@ html {
   width: 100%;
   margin: 0;
 }
+@media (max-width: 440px) {
+  .p-toast {
+    width: 18rem;
+    top: 10px;
+    padding: 0 10px;
+  }
+}
 </style>

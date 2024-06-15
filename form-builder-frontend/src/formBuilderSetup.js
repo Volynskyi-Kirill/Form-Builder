@@ -27,6 +27,7 @@ const addQuestion = async (type) => {
     questions.value.push(response.data)
     selectedQuestion.value = response.data
     textAreaSize.value = response.data.size
+    localStorage.setItem(STORAGE.SELECTED_QUESTION_ID, response.data._id)
   } catch (error) {
     console.error('Error adding question:', error.response.data.message)
   }
@@ -49,18 +50,6 @@ const selectQuestion = (question) => {
   selectedQuestion.value = question
   textAreaSize.value = question.size
   localStorage.setItem(STORAGE.SELECTED_QUESTION_ID, question._id)
-}
-
-const updateQuestionLabel = (event) => {
-  if (selectedQuestion.value) {
-    selectedQuestion.value.title = event.target.value
-  }
-}
-
-const updateQuestionText = (event) => {
-  if (selectedQuestion.value) {
-    selectedQuestion.value.text = event.target.value
-  }
 }
 
 const updateTextAreaSize = (newSize) => {
@@ -91,8 +80,6 @@ export {
   addQuestion,
   deleteQuestion,
   selectQuestion,
-  updateQuestionLabel,
-  updateQuestionText,
   updateTextAreaSize,
   saveQuestion
 }

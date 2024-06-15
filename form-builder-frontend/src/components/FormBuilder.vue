@@ -8,14 +8,12 @@ import {
   addQuestion,
   deleteQuestion,
   selectQuestion,
-  updateQuestionLabel,
-  updateQuestionText,
   updateTextAreaSize
 } from '../formBuilderSetup'
 import QuestionList from './QuestionList.vue'
 import QuestionTypeDropdown from './QuestionTypeDropdown.vue'
 import QuestionPreview from './QuestionPreview.vue'
-import { STORAGE } from '../constants'
+import { STORAGE, EVENT } from '../constants'
 
 onMounted(async () => {
   await fetchQuestions()
@@ -31,18 +29,16 @@ onMounted(async () => {
       <QuestionList
         :questions="questions"
         :selected-question="selectedQuestion"
-        @select-question="selectQuestion"
-        @delete-question="deleteQuestion"
+        @[EVENT.SELECT_QUESTION]="selectQuestion"
+        @[EVENT.DELETE_QUESTION]="deleteQuestion"
       />
-      <QuestionTypeDropdown @add-question="addQuestion" />
+      <QuestionTypeDropdown @[EVENT.ADD_QUESTION]="addQuestion" />
     </div>
     <QuestionPreview
       v-if="selectedQuestion"
       :selected-question="selectedQuestion"
       :text-area-size="textAreaSize"
-      @update-question-label="updateQuestionLabel"
-      @update-question-text="updateQuestionText"
-      @update-text-area-size="updateTextAreaSize"
+      @[EVENT.UPDATE_TEXT_AREA_SIZE]="updateTextAreaSize"
     />
   </div>
 </template>
